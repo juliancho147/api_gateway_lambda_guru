@@ -5,7 +5,9 @@ __pycache__/
 
 # C extensions
 *.so
-
+*.zip
+.terraform/
+*.terraform.lock.hcl
 # Distribution / packaging
 .Python
 build/
