@@ -16,7 +16,10 @@ data "aws_iam_policy_document" "lambda_dynamo_policy" {
     sid    = "EnableDynamos"
     effect = "Allow"
     actions = [
-      "dynamodb:PutItem"
+      "dynamodb:PutItem",
+      "dynamodb:GetItem",
+      "dynamodb:Scan",
+      "dynamodb:DeleteItem"
     ]
     resources = [aws_dynamodb_table.Clothes_itmes_table.arn]
   }

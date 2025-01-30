@@ -1,18 +1,33 @@
 import json
+import boto3
+import traceback
+
+
+dynamodb = boto3.resource("dynamodb")
+table_name = "ClothesItems"
+table = dynamodb.Table(table_name)
 
 
 def lambda_handler(event, context):
-    """_summary_
+    """create new items
 
     Args:
-        event (dic): _description_
-        context (dic): _description_
+        event (_type_): _description_
+        context (_type_): _description_
 
     Returns:
-        _type_: _description_
+        json: response
     """
-    print(event)
-    return {
-        'statusCode': 200,
-        'body': json.dumps(f'{event}')
-    }
+    try:
+        query_params = json.loads(event["body"])
+        table.put_item(Item=query_params)
+        return {
+            "statusCode": 200,
+            "body": json.dumps({"message": "Item insertado correctamente"}),
+        }
+    except Exception as e:
+        error_trace = traceback.format_exc()
+        return {
+            "statusCode": 500,
+            "body": json.dumps({"error": str(e), "traceback": error_trace}),
+        }
