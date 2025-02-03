@@ -4,7 +4,7 @@ resource "aws_iam_role" "lambda_role" {
 }
 resource "aws_iam_role_policy_attachment" "lambda_basic" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-  role = aws_iam_role.lambda_role.name
+  role       = aws_iam_role.lambda_role.name
 }
 resource "aws_iam_policy" "policy_lambda_dynamo" {
   name   = "policy-lambda-dynamo"
